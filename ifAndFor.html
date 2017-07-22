@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ifAndFor</title>
+</head>
+<body>
+	
+	<!-- v-if -->
+	<div id="app-3">
+		<p v-if="seen">现在你看到我了</p>
+	</div>
+	
+	<!-- v-for -->
+	<div id="app-4">
+		<ol>
+			<li v-for="todo in todos">
+				{{ todo.text }}
+			</li>
+		</ol>
+	</div>
+
+	<!-- 处理用户输入 -->
+	<div id="app-5">
+		<p>{{ message }}</p>
+		<button v-on:click="reverseMessage">逆转消息</button><!-- n后面与click之间不能有空格 -->
+	</div>
+	<br>
+
+	<!-- 表单输入和应用之间的双向绑定 -->
+	<div id="app-6">
+		<p>{{ message }}</p>
+		<input style="width: 300px;" type="text" v-model="message">
+	</div>
+
+</body>
+<script src="vuejs/vue.js"></script>
+<script>
+	var app6 = new Vue({
+		el: "#app-6",
+		data: {
+			message: "轻松实现同步input里面的内容"
+		}
+	})
+
+	var app5 = new Vue({
+		el: "#app-5",
+		data:{
+			message: "Hello Engineer Xu"
+		},
+		methods: {
+			reverseMessage: function (){
+				this.message = this.message.split('').reverse().join('');
+			}
+		}
+	})
+
+	var app4 = new Vue({
+		el: "#app-4",
+		data: {
+			todos :[
+				{ text: "学习" },
+				{ text: "实践" },
+				{ text: "总结"}
+			]
+		}
+	})
+
+	var app3 = new Vue({
+		el: "#app-3",
+		data: {
+			seen: true
+		}
+	})
+</script>
+</html>
