@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>实例生命周期</title>
+</head>
+<body>
+	<!-- Mustache 语法 -->
+	<span>Mesage: {{ msg }}</span>
+
+	<!-- v-once指令 -->
+	<span v-once>This will never change: {{ msg }}</span>
+
+	<!-- v-html指令插入纯HTML -->
+	<div v-html="rwHtml"></div>
+
+	<!-- 属性 -->
+	<div v-bind:id="dynamicId"></div>
+	<button v-bind:disabled="isButtonDisabled">Button</button>
+
+	<!-- 使用Javascrip表达式 -->
+	<div>{{ number + 1}}</div>
+	<div>{{ ok ? "yes" : "no"}}</div>
+	<div>{{ message.split("").reverse().join("")}}</div>
+	<div v-bind:id="list-' + id"></div>
+	<!-- 使用javasc的限制是每个绑定都之恩给你包含单个表达式，所以javascript语句和流控制都不会生效 -->
+</body>
+<script src="vuejs/vue.js"></script>
+<script>
+	//生命周期钩子
+	var vm = new Vue({
+		data: {
+			a: 1
+		},
+		created: function(){
+			console.log("a is: " + this.a);
+		}
+	})
+	//还有一些其他的生命周期钩子： mounted, updated, destroyed.钩子的this指向调用它的Vue实例
+</script>
+</html>

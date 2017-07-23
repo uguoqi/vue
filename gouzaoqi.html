@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>构造器</title>
+</head>
+<body>
+	
+</body>
+<script src="vuejs/vue.js"></script>
+<script>
+/*创建一个Vue的根示例*/
+	var vm = new Vue({
+
+	})
+
+
+
+/*创建可复用的组件构造器*/
+var MyComponent = Vue.extend({
+
+})
+
+var myComponentInstance = new MyComponent();
+
+/*每一个Vue实例都会代理其data对象里所有的属性*/
+var data = { a: 1}
+var vm = new Vue({
+	data: data
+})
+
+//设置属性也会影响到原始数据
+vm.a === data.a;
+vm.a = 2;
+console.log(data.a);
+
+//设置原始数据也会影响到属性
+data.a = 3;
+console.log(vm.a);
+
+</script>
+</html>
