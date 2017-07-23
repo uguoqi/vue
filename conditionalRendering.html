@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>条件渲染</title>
+</head>
+<body>
+	<div id="condition">
+		<h1 v-if="ok">Yes</h1>
+		<h1 v-else>No</h1>
+
+		<template v-if="ok">
+			<h1>{{ title }}</h1>
+			<p>Paragraph 1</p>
+			<p>Paragraph 2</p>
+		</template>
+
+		<div v-if="Math.random() > 0.5">
+			Now you see me
+		</div>
+		<div v-else>
+			Now you don't
+		</div>
+
+		<div v-if="type === 'A'">
+			A
+		</div>
+		<div v-else-if="type === 'B'">
+			B
+		</div>
+		<div v-else-if="type === 'C'">
+			C
+		</div>
+		<div v-else>Not A/B/C</div>
+	</div>
+	
+</body>
+<script src="vuejs/vue.js"></script>
+<script>
+	new Vue({
+		el: "#condition",
+		data: {
+			ok: true,
+			title: '条件渲染',
+			type: 'B'
+		}
+	})
+</script>
+</html>

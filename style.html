@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>class与style的绑定</title>
+</head>
+<body>
+	<div v-bind:class="{ active: isActive }">
+		
+	</div>
+	
+	<div id="demo">
+		<div class="static" v-bind:class="{ active: isActive, 'text-danger': hasError }">
+			
+		</div>
+	</div>
+
+	<div class="wrap" v-bind:class="classObject">
+		wrap
+	</div>
+
+	<div class="computed" v-bind:class="classObject">computed</div>
+
+	<div class="arr" v-bind:class="[activeClass,errorClass]"></div>
+
+	<!-- 根据条件切换列表中的class -->
+	<!-- <div v-bind:class="[isActive ? activeClass: '', errorClass]"></div> -->
+
+	<div id="app">
+		<my></my>
+	</div>
+
+	<!-- 绑定内联样式 -->
+	<div id="app1" v-bind:style="{color: activeColor, fontSize: fontSize + 'px'}">
+		绑定内联样式
+	</div>
+	<div id="app2" v-bind:style="styleObject">
+		绑定一个样式对象
+	</div>
+
+	<!-- 数组语法，将多个样式对象应用到一个元素上 -->
+	<div v-bind:style="[baseStyle, overridingStyle]"></div>
+</body>
+<script src="vuejs/vue.js"></script>
+<script>
+
+	/*绑定内联样式*/
+	new  Vue({
+		el: "#app1",
+		data: {
+			activeColor: 'red',
+			fontSize: 30
+		}
+	})
+	new Vue({
+		el: "#app2",
+		data: {
+			styleObject: {
+				color: 'red',
+				fontSize: '12px'
+			}
+		}
+	})
+
+	/*用在组件上*/
+	Vue.component('my',{
+		template: '<p class="foo bar">Hi</p>'
+	})
+	new Vue({
+		el: '#app',
+		data: {
+			message: "Xu Sir"
+		}
+	})
+
+	/*把一个数组传给v-bind:class*/
+	new Vue({
+		el: ".arr",
+		data: {
+			activeClass: 'active',
+			errorClass: 'text-danger'
+		}
+	})
+	/*绑定返回对象的计算属性*/
+	new Vue({
+		el: ".computed",
+		data: {
+			isActive: true,
+			error: null
+		},
+		computed: {
+			classObject: function(){
+				return {
+					active: this.isActive && !this.error,
+					'text-danger': this.error && this.error.type === 'fatal',
+				}
+			}
+		}
+	})
+
+
+	/*绑定一个对象*/
+	new Vue({
+		el: ".wrap",
+		data: {
+			classObject: {
+				active: true,
+				'text-danger':false
+			}
+		}
+	})
+	/*对象语法*/
+	var vm = new Vue({
+		el: ".static",
+		data: {
+			isActive: true,
+			hasError: false
+		}
+	})
+</script>
+</html>
