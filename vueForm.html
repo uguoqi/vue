@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>vue 表单控件绑定</title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<!--v-model用于表单控件上的数据双向绑定-->
+		
+		<!--文本-->
+		<!--<div id="app01">-->
+			<!--<input type="text" v-model="message" placeholder="Edit me"/>-->
+			<!--<p>Your Edited message is {{ message }}</p>-->
+		<!--</div>-->
+		
+		<!--多行文本-->
+		<!--<textarea name="text" v-model="info"></textarea>-->
+		
+		<!--复选框-->
+		<!--<input type="checkbox" v-model="checked"/>-->
+		<!--<label for="checkbox">{{ checked }}</label>-->
+		<div id="app02">
+			<input type="checkbox" id="jack" value="1" v-model="checkedNames">
+			<label for="jack">Jack</label>
+			<input type="checkbox" id="john" value="John" v-model="checkedNames">
+			<label for="john">John</label>
+			<input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+			<label for="mike">Mike</label>
+			<br>
+			<span>Checked names: {{ checkedNames }}</span>
+		</div>
+		<script>
+			new Vue({
+			  el: '#app02',
+			  data: {
+			    checkedNames: []
+			  }
+			})
+		</script>
+		
+		<!--单选按钮-->
+		<div id="app03">
+			<input type="radio" name="ipt1" v-model="check" value="one" id="one"/>
+			<label for="one">one</label>
+			<br />
+			<input type="radio" name="ipt1" v-model="check" value="two" id="two"/>
+			<label for="two">two</label>
+			<br />
+			<span>picked: {{ check }}</span>
+		</div>
+		<script>
+			new Vue({
+				el: "#app03",
+				data: {
+					check: ""
+				}
+			})
+		</script>
+		
+		<!--单选列表-->
+		<div id="app04">
+			<select name="" id="" v-model="selected">
+				<option value="" disabled>请选择</option>
+				<option>A</option>
+				<option>B</option>
+				<option>C</option>
+			</select>
+			<span>You have selected {{ selected }}</span>
+		</div>
+		<script>
+			new Vue({
+				el: "#app04",
+				data: {
+					selected: ''
+				}
+			})
+		</script>
+		
+		<!--多选 绑定到一个数组里面-->
+		<div id="app05">
+			<select name="" id="" multiple v-model="selected">
+				<option value="" disabled>请选择</option>
+				<option>A</option>
+				<option>B</option>
+				<option>C</option>
+			</select>
+			<span>You have selected {{ selected }}</span>
+		</div>
+		<script>
+			new Vue({
+				el: "#app05",
+				data: {
+					selected: []
+				}
+			})
+		</script>
+		
+		<!--绑定value-->
+		<!-- 当选中时，`picked` 为字符串 "a" -->
+		<input type="radio" v-model="picked" value="a">
+		<!-- `toggle` 为 true 或 false -->
+		<input type="checkbox" v-model="toggle">
+		<!-- 当选中时，`selected` 为字符串 "abc" -->
+		<select v-model="selected">
+		  <option value="abc">ABC</option>
+		</select>
+		
+		<!--复选框-->
+		<input
+		  	type="checkbox"
+		  	v-model="toggle"
+		 	v-bind:true-value="a"
+		  	v-bind:false-value="b"
+		>
+		<script>
+			// 当选中时
+			vm.toggle === vm.a
+			// 当没有选中时
+			vm.toggle === vm.b
+		</script>
+		
+		<!--单选按钮-->
+		<input type="radio" v-model="pick" v-bind:value="a">
+		<script>
+			vm.pick === vm.a
+		</script>
+		
+		<!--选择列表-->
+		<select v-model="selected">
+		    <!-- 内联对象字面量 -->
+		  	<option v-bind:value="{ number: 123 }">123</option>
+		</select>
+		<script>
+			// 当选中时
+			typeof vm.selected // -> 'object'
+			vm.selected.number // -> 123
+		</script>
+		
+		<!--修饰符-->
+			<!-- 在 "change" 而不是 "input" 事件中更新 -->
+			<input v-model.lazy="msg" >
+			<input v-model.number="age" type="number">
+			<input v-model.trim="msg">
+	</body>
+	
+</html>

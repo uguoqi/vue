@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>vue 列表渲染</title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<!--基本语法-->
+		<ul id="app01">
+			<li v-for="item in items">
+				{{ item.txt }}
+			</li>
+		</ul>
+		<script>
+			var app01 = new Vue({
+				el: "#app01",
+				data: {
+					items: [
+						{txt: "book"}
+					]
+				}
+			})
+		</script>
+		<!--支持可选的参数index-->
+		<ul id="app02">
+			<li v-for="(item,index) in items">
+				{{ item.key }} - {{ item.txt }}
+			</li>
+		</ul>
+		<script>
+			var app02 = new Vue({
+				el: "#app02",
+				data: {
+					items: [
+						{txt: "book"}
+					]
+				}
+			})
+		</script>
+		
+		<!--template v-for-->
+		<ul id="app03">
+			<template v-for="item in items">
+				<li>{{ item.msg }}</li>
+				<li class="happy"></li>
+			</template>
+		</ul>
+		
+		<!--对象迭代-->
+		<ul>
+			<li v-for="value in object">{{ value.message }}</li>
+		</ul>
+		
+		<!--整数迭代-->
+		<div v-for="n in 10">{{ n }}</div>
+		
+		<!--组件和v-for-->
+		<template v-for="todo in todos" :key="todo.id"></template>
+		
+		<my-compoent
+			v-for="(item,index) in items"
+			v-bind:item="item"
+			v-bind:index="index"
+			v-bind:key="item.id">
+			
+		</my-compoent>
+	</body>
+	
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>vue 计算属性</title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<!--计算属性-->
+		<div id="example">
+			{{ message.split("").reverse().join("") }}
+		</div>
+		
+		<div id="example2">
+			<p>message is {{ message }}</p>
+			<p>resersedMessage is {{ reverseMessage }}</p>
+		</div>
+		<script>
+			var example2 = new Vue({
+				el: "example2",
+				data: {
+					message: "ni hao"
+				},
+				/*computed*/
+				computed: {
+					reverseMessage: function(){
+						return this.message.split("").reverse().join("");
+					}
+				},
+				/*methods*/
+				methods: {
+					reverseMessage: function(){
+						return this.message.split("").reverse().join("");
+					}
+				},
+				/*watch*/
+				watch: {
+					reverseMessage: function(){
+						return this.message.split("").reverse().join("");
+					}
+				}
+			})
+		</script>
+	</body>
+	
+</html>

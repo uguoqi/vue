@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>vue 条件渲染</title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<!-- if else-->
+		<h3 v-if="ok">Yes</h3>
+		<h3 v-else>no</h3>
+		
+		<!--配合template使用-->
+		<template v-if="isOk">
+			<h3></h3>
+			<p></p>
+			<a href=""></a>
+		</template>
+		
+		<!--用key来管理可复用的元素-->
+		<template v-if="loginType === 'username'">
+		    <label>Username</label>
+		    <input placeholder="Enter your username" key="username-input">
+		</template>
+		<template v-else>
+		    <label>Email</label>
+		    <input placeholder="Enter your email address" key="email-input">
+		</template>
+	</body>
+	
+</html>

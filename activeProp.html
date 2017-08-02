@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>vue 动态prop</title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<!--动态props-->
+		<div>
+			<input type="text" v-model="parentMessage"/>
+			<h3>---------</h3>
+			<p v-bind: my-message="parentMessage"></p>
+		</div>
+		
+		<!--字面量语法 vs 动态语法-->
+		<comp my-message="1"></comp>//传递了一个字符串
+		<comp v-bind:my-message="1"></comp>//传递了一个number
+		
+		<!--非父子之间的通信-->
+		<script>
+			var bus = new Vue();
+			/*触发组件A中的事件*/
+			bus.$emit("id-selected",1);
+			/*监听组件中的事件*/
+			bus.$on("id-selected",function(id){
+				
+			})
+		</script>
+		
+		<!--slot标签中的内容被视为备注内容-->
+		<div>
+			<h3>我是子组件中的内容</h3>
+			<slot>
+				只有在没有分发的内容时才会显示
+			</slot>
+		</div>
+		
+		<!--具名slot,将匹配内容片断到具有指定特性的元素,仍然可以有个无名slot,即默认slot,作为找不到匹配内容片断的备用插槽-->
+		
+		<!--动态组件-->
+		<script>
+			var vm = new Vue({
+				el: "#example",
+				data: {
+					currentPlace: "home"
+				},
+				components: {
+					home: {
+						
+					},
+					posts: {
+						
+					},
+					shchive: {
+						
+					}
+				}
+			})
+		</script>
+		
+	</body>
+	
+</html>

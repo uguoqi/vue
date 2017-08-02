@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>vue 模板语法</title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<!--插值-->
+		
+		<!--文本-->
+		<span>message is {{ message }}</span>
+		<!--一次插值-->
+		<span v-once>This will never change {{ message}}</span>
+		<!--纯HTML-->
+		<div v-html="rawHtml"></div>
+		<!--属性-->
+		<div v-bind:id="dynamicId"></div>
+		<button v-bind:disabled="changeDisabled">click me</button>
+		<!--使用JavaScript表达式-->
+		<p>
+			<span>{{ number + 1}}</span>
+			<span>{{isTrue ? "true" : "false"}}</span>
+			<span>{{ message.split("").reverse().join("")}}</span>
+		</p>
+		
+		
+		<!--指令-->
+		<p v-if="seen">Now you can see me</p>
+		<a v-bind:href="url"></a>
+		<button v-on:click="doSomething">click me</button>
+		
+		<!--过滤器-->
+		<div>{{ message | uppercase}}</div>
+		<div v-bind:id="titleId | formtedId"></div>
+		<script>
+			new Vue({
+				filters: {
+					formtedId: function(value){
+						if(!value){
+							return ""
+						}else {
+							value = value.toString();
+							value = value.charAt(0).toUpperCase() + value.slice(1);
+						}
+					}
+				}
+			})
+		</script>
+		
+		<!--缩写-->
+		<a v-bind:href="url"></a>
+		<a :href="url"></a>
+		
+		<button v-on:click="dosomething">click me</button>
+		<button @click="dosomething">click me</button>
+	</body>
+	
+</html>

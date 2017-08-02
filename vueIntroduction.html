@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>vue 介绍</title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<!--声明式渲染-->
+		<div id="app01">
+			{{ message }}
+		</div>
+		
+		<script>
+		var app01 = new Vue({
+				el: "#app01",
+				data: {
+					message: "Hello Everybody!"
+				}
+			})
+		</script>
+		
+		<!--响应式的-->
+		<div id="app02">
+			<span v-bind:title="message">
+				鼠标过来显示弹框信息
+			</span>
+		</div>
+		
+		<script>
+			var app02 = new Vue({
+				el: "#app02",
+				data: {
+					message: "页面加载于" + new Date()
+				}
+			})
+		</script>
+		
+		<!--条件-->
+		<div id="app03">
+			<p v-if="seen">Now you can see me!</p>
+			<button v-on:click="change">切换</button>
+		</div>
+		<script>
+			var app03 = new Vue({
+				el: "#app03",
+				data: {
+					seen: true
+				},
+				methods: {
+					change: function(){
+						var state = this.seen;
+						this.seen = !state;
+					}
+				}
+			})
+		</script>
+		
+		
+		<!--循环-->
+		<div id="app04">
+			<ul>
+				<li v-for="menu in menuList">
+					{{ menu.txt }}
+				</li>
+			</ul>
+		</div>
+		<script>
+			var app04 = new Vue({
+				el: "#app04",
+				data: {
+					menuList: [
+						{txt: "vue.js"},
+						{txt: "iVew"},
+						{txt: "nodejs"},
+						{txt: "webpack"},
+						{txt: "ES6"},
+						{txt: "commmonJs"}
+					]
+				}
+			})
+		</script>
+		
+		<!--处理用户输入-->
+		<div id="app05">
+			<p>{{ message }}</p>
+			<button v-on:click="reverseMessage">reverse message</button>
+		</div>
+		<script>
+			var app05 = new Vue({
+				el: "#app05",
+				data: {
+					message: "Hello Xu Xiansen"
+				},
+				methods: {
+					reverseMessage: function(){
+						this.message = this.message.split("").reverse().join("");
+					}
+				}
+			})
+		</script>
+		
+		<!--表单输入和应用状态的双向绑定-->
+		<div id="app06">
+			<p>{{ message }}</p>
+			<input type="text" v-model="message" />
+		</div>
+		<script>
+			var app06 = new Vue({
+				el: "#app06",
+				data: {
+					message: "Hello, Xu Huyin"
+				}
+			})
+		</script>
+		
+		<!--组件化应用构建-->
+		<div id="app07">
+			<ol>
+				<todo-item
+					v-for="item in groceries"
+					v-bind:todo="item"
+					v-bind:key="item.id">
+					
+				</todo-item>
+			</ol>
+		</div>
+		<script>
+			Vue.component("todo-item",{
+				props: ["todo"],
+				template: "<li>{{ todo.txt }}</li>"
+			})
+			var app07 = new Vue({
+				el: "#app07",
+				data: {
+					groceries: [
+						{txt: "vue",id: 1},
+						{txt: "react", id: 2},
+						{txt: "PHP",id: 3}
+					]
+				}
+			})
+			
+		</script>
+		
+		
+		<!--<div id="app-7">
+		    <ol>
+			    <todo-item
+			        v-for="item in groceryList"
+			        v-bind:todo="item"
+			        v-bind:key="item.id">
+			    </todo-item>
+		    </ol>
+		</div>
+		<script>
+			Vue.component('todo-item', {
+				props: ['todo'],
+				template: '<li>{{ todo.text }}</li>'
+			})
+			var app7 = new Vue({
+			    el: '#app-7',
+			    data: {
+				    groceryList: [
+				        { id: 0, text: '蔬菜' },
+				        { id: 1, text: '奶酪' },
+				        { id: 2, text: '随便其他什么人吃的东西' }
+				    ]
+				}
+			})
+		</script>-->
+	</body>
+	
+</html>
